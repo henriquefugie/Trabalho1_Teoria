@@ -1,0 +1,5 @@
+; linha contendo apenas comentario
+0 1 1 d 0
+0 _ _ e 1
+1 1 1 e 1
+1 _ _ d pare
