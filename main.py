@@ -1,6 +1,38 @@
 #Estado H: estado halt, estado final
 #Caracteres especiais: '*', '_', '!', 'pare'
 
+import argparse
+
+def minha_funcao():
+    print("Executando minha_funcao...")
+    
+
+def outra_funcao():
+    print("Executando outra_funcao...")
+
+def tetos(n):
+    for i in range(n):
+        print("Teto", i+1)
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-r", "--resume", action="store_true", help="Opção sem parâmetro")
+parser.add_argument("-v", "--verbose", action="store_true", help="Opção sem parâmetro")
+parser.add_argument("-s", "--step", type=int, help="Número de tetos a serem apresentados")
+
+args = parser.parse_args()
+
+if args.resume:
+    minha_funcao()
+
+if args.verbose:
+    outra_funcao()
+
+if args.step:
+    print("Opção C foi especificada")
+
+if args.numero_tetos:
+    tetos(args.numero_tetos)
+
 class MT:
     def __init__(self, input, arquivo):
         input = ''.join(['_']) + input + ''.join(['_'])
