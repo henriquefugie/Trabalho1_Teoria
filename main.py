@@ -8,6 +8,37 @@ class NoPilha:
     def __repr__(self):
         return '%s -> %s' % (self.dado, self.anterior)
 
+# Executar programa pelo terminal
+import argparse
+
+parser = argparse.ArgumentParser(description='Simulador de Máquina de Turing')
+parser.add_argument('programa', help='Nome do arquivo que contém o código da MT')
+parser.add_argument('-resume', '-r', action='store_true', help='Executa o programa até o fim e imprime o conteúdo final na fita')
+parser.add_argument('-verbose', '-v', action='store_true', help='Mostra a execução passo a passo do programa até o fim')
+parser.add_argument('-step', '-s', type=int, help='Mostra n linhas de execução passo a passo na tela')
+args = parser.parse_args()
+
+with open(args.programa, 'r') as file:
+    codigo_mt = file.read()
+
+print('Simulador de Máquina de Turing v1.0 - IFMG 2023')
+print('Desenvolvido como trabalho prático para a disciplina de Teoria da Computação')
+print('Autores: Joao Vitor Dias Fernandes & Henrique Fugie\n')
+
+palavra_inicial = input('Forneça a palavra inicial: ')
+
+step_value = args.step
+programa_value = args.programa
+
+if args.resume:
+    print("Executando a opcao resume")
+
+if args.verbose:
+    print("Executando a opcao verbose")
+
+if args.step:
+    print("Executando a opcao step")
+    print("Quantidade de steps:", step_value)
 
 class MT:
     def __init__(self, input, arquivo):
@@ -277,7 +308,9 @@ def remove_tabulacao(nome_arquivo):
 
 input = '11'
 arquivo_sem_tab = remove_tabulacao('teste_bloco_retorne.txt')
-mt = MT(input, arquivo_sem_tab)
+# mt = MT(input, arquivo_sem_tab)
+arquivo_sem_tab1 = remove_tabulacao(programa_value)
+mt = MT(palavra_inicial, arquivo_sem_tab)
 mt.teste()
 mt.programa()
 mt.teste()
