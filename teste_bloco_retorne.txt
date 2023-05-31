@@ -1,17 +1,17 @@
 bloco main 1
-    1 _ _ e 2
-    1 1 1 d 1
+    1 _ -- _ e 2
+    1 1 -- 1 d 1
     2 moveIni 3
     3 moveFim 4
-    4 * * d pare
+    4 * -- * d pare
 fim ; main
 
 bloco moveIni 1
-    1 _ * d retorne
-    1 * * e 1
+    1 _ -- * d retorne
+    1 * -- * e 1
 fim ; moveIni
 
 bloco moveFim 1
-    1 _ * e retorne
-    1 * * d 1
+    1 _ -- * e retorne
+    1 * -- * d 1
 fim ; moveFim

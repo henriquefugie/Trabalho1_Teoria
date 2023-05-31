@@ -12,14 +12,14 @@ class NoPilha:
 class MT:
     def __init__(self, input, arquivo):
         self.simbolo = input[0]
-        input = ''.join(['___________________w_']) + input + \
+        input = ''.join(['_____________________']) + input + \
             ''.join(['____________________'])
         self.dicionario = {}
         # Lembrete, self.estado diz em qual linha o programa vai comecar do main
         # Tem que arrumar isso
         self.estado = '1'
         self.fita = list(input)
-        self.cabeca = 20
+        self.cabeca = 21
         self.linha_atual = 0
         self.bloco = 'main'
         self.verificaFim = None
@@ -35,6 +35,8 @@ class MT:
             elif self.linha_atual < len(self.linhasArquivo_array):
                 valores_linha = self.linhasArquivo_array[self.linha_atual].split(
                     ' ')
+                #print(valores_linha)
+                #print(len(valores_linha))
                 # Se nao for comentario
                 if valores_linha[0] != ';':
                     # BLOCO
@@ -73,9 +75,9 @@ class MT:
                             self.dicionario[self.chama_bloco, valores_linha[0]] = (
                                 valores_linha[2], valores_linha[1], 1)
                             # print(valores_linha)
-                    if len(valores_linha) == 5:
+                    if len(valores_linha) == 6:
                         # print(self.verificaFim)
-                        estado_atual, simbolo_atual, novo_simbolo, movimento, novo_estado = valores_linha
+                        estado_atual, simbolo_atual, traco, novo_simbolo, movimento, novo_estado = valores_linha
                         # Tupla no formato:
                         # <estado atual> <símbolo atual> - - <novo símbolo> <movimento> <novo estado>
                         if len(estado_atual) > 4 and estado_atual != 'retorne':
@@ -101,7 +103,7 @@ class MT:
                 self.linha_atual += 1
 
     def teste(self):
-        # print(self.dicionario)
+        #print(self.dicionario)
         print(self.fita)
 
     def passo(self, bloco, estado, simbolo):
@@ -124,7 +126,8 @@ class MT:
             if novo_simbolo != '*':
                 self.fita[self.cabeca] = novo_simbolo
             #print(bloco, self.fita[self.cabeca], movimento, self.estado)
-            print(bloco, simbolo)
+            print(bloco, simbolo, self.cabeca)
+            #print(self.fita)
             # print(self.fita)
             if movimento == 'e':
                 self.cabeca -= 1
@@ -171,7 +174,7 @@ class MT:
                     if novo_simbolo != '*':
                         self.fita[self.cabeca] = novo_simbolo
                     #print(bloco, self.fita[self.cabeca], movimento, self.estado)
-                    print(bloco, simbolo)
+                    print(bloco, simbolo, self.cabeca)
                     # print(self.fita)
                     if movimento == 'e':
                         self.cabeca -= 1
@@ -273,7 +276,7 @@ def remove_tabulacao(nome_arquivo):
 
 
 input = '11'
-arquivo_sem_tab = remove_tabulacao('teste_blocos.txt')
+arquivo_sem_tab = remove_tabulacao('teste_bloco_retorne.txt')
 mt = MT(input, arquivo_sem_tab)
 mt.teste()
 mt.programa()
