@@ -5,7 +5,7 @@ bloco main 1
     3 _ -- _ d pare
 fim ; main
 
-bloco teste 1
-    1 1 -- * e 1
-    1 _ -- _ d pare
+bloco teste 3
+    3 1 -- * e 3
+    3 _ -- _ d pare
 fim ; teste
