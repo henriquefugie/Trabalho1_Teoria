@@ -1,5 +1,6 @@
 # Joao Vitor Dias Fernandes e Henrique Fugie
 
+# Pilha para ser usada na verificacao de blocos
 class NoPilha:
     def __init__(self, dado=0, nodo_anterior=None):
         self.dado = dado
@@ -46,28 +47,23 @@ class MT:
         input = ''.join(['_____________________']) + input + \
             ''.join(['____________________'])
         self.dicionario = {}
-        # Lembrete, self.estado diz em qual linha o programa vai comecar do main
-        # Tem que arrumar isso
         self.estado = '1'
         self.fita = list(input)
         self.cabeca = 21
         self.linha_atual = 0
         self.bloco = 'main'
         self.verificaFim = None
-        self.blocos = {}
+        self.inicio_bloco = {}
         self.chama_bloco = 'main'
         self.fimArquivo = True
         self.linhasArquivo_array = arquivo.splitlines()
         self.topo_pilha = None
-        self.bloco_pilha = 'main'
         while self.fimArquivo:
             if self.linha_atual == len(self.linhasArquivo_array):
                 self.fimArquivo = False
             elif self.linha_atual < len(self.linhasArquivo_array):
                 valores_linha = self.linhasArquivo_array[self.linha_atual].split(
                     ' ')
-                #print(valores_linha)
-                #print(len(valores_linha))
                 # Se nao for comentario
                 if valores_linha[0] != ';':
                     # BLOCO
@@ -77,37 +73,19 @@ class MT:
                                 valores_linha[1], self.linha_atual)
 
                             self.chama_bloco = valores_linha[1]
-                            # Armazena o nome do bloco, onde comeca o estado do bloco e a linha do bloco
-                            self.blocos[valores_linha[1]] = (
-                                valores_linha[2], self.linha_atual)
-                            # print(self.blocos)
-                            # print(self.bloco)
-                            # print(self.blocos)
-                        elif valores_linha[0] == 'fim':
-                            # TODO
-                            # print(self.linha_atual)
-                            # print(self.blocos)
-                            # print(self.verificaFim)
-                            """linha_fim = self.linha_atual - self.verificaFim[1]
-                            for linha in range(linha_fim):
-                                self.dicionario[(self.verificaFim[0], estado_atual)] = (linha + self.verificaFim[1], valores_linha[1], novo_estado)
-                                #print(linha + self.verificaFim[1])
-                            #print(linha_fim)"""
-                            pass
+                            # Armazena o nome do bloco e onde comeca o estado do bloco
+                            self.inicio_bloco[valores_linha[1]] = (
+                                valores_linha[2])
+                            
+                            # Atualiza o self.estado para o estado inicial do bloco main
+                            if valores_linha[1] == 'main':
+                                self.estado = valores_linha[2]
                         # Entra aqui quando for mandado para outro bloco
                         # Exemplo: 10 moveFim 11
                         else:
-                            # print(self.blocos[valores_linha[1]])
-                            # print(valores_linha)
-                            #print(self.chama_bloco, valores_linha[0],self.linha_atual, valores_linha[1], novo_estado)
-                            # print(estado_atual)
-                            """ARRUMAR NOVO_ESTADO"""
-
                             self.dicionario[self.chama_bloco, valores_linha[0]] = (
                                 valores_linha[2], valores_linha[1], 1)
-                            # print(valores_linha)
                     if len(valores_linha) == 6:
-                        # print(self.verificaFim)
                         estado_atual, simbolo_atual, traco, novo_simbolo, movimento, novo_estado = valores_linha
                         # Tupla no formato:
                         # <estado atual> <símbolo atual> - - <novo símbolo> <movimento> <novo estado>
@@ -126,7 +104,6 @@ class MT:
                             print('Movimento: ', movimento)
                             break
 
-                        #print(self.verificaFim[0], estado_atual, simbolo_atual, self.verificaFim[1], novo_simbolo, movimento, novo_estado)
                         self.dicionario[self.verificaFim[0], estado_atual, simbolo_atual] = (
                             self.verificaFim[1], novo_simbolo, movimento, novo_estado)
                         self.dicionario[self.verificaFim[0], estado_atual, '*'] = (
@@ -138,8 +115,6 @@ class MT:
         print(self.fita)
 
     def passo(self, bloco, estado, simbolo):
-        # print(self.blocos)
-        # print(self.dicionario)
         chave = bloco, str(estado), simbolo
         if chave in self.dicionario:
             dados_linha = self.dicionario[chave]
@@ -156,10 +131,7 @@ class MT:
                 self.estado = novo_estado
             if novo_simbolo != '*':
                 self.fita[self.cabeca] = novo_simbolo
-            #print(bloco, self.fita[self.cabeca], movimento, self.estado)
             print(bloco, simbolo, self.cabeca)
-            #print(self.fita)
-            # print(self.fita)
             if movimento == 'e':
                 self.cabeca -= 1
                 self.simbolo = self.fita[self.cabeca]
@@ -176,15 +148,13 @@ class MT:
             self.insere_pilha((bloco_atual, estado_inicial,
                               self.fita[self.cabeca], estado_retorno, bloco_retorno))
             dados = self.topo_pilha.dado
-            # print(estado)
 
-            self.passo_bloco(dados[0], dados[1], dados[2], dados[3], dados[4])
-            #print(estado_retorno, bloco_atual, estado_inicial)
+            # Essa linha eh responsavel por checar qual o estado inicial do bloco chamado e atualizar o self.estado com esse estado inicial
+            self.estado = self.inicio_bloco[dados[0]]
+
+            self.passo_bloco(dados[0], self.estado, dados[2], dados[3], dados[4])
 
     def passo_bloco(self, bloco, estado, simbolo, estado_retorno, bloco_retorno):
-        # print(self.blocos)
-        # print(self.dicionario)
-        #print(bloco, estado, simbolo)
         if str(estado) != 'pare':
             chave = bloco, str(estado), simbolo
             if chave in self.dicionario:
@@ -195,18 +165,14 @@ class MT:
                     dados_linha = self.dicionario[bloco, str(estado), '*']
                 else:
                     dados_linha = self.dicionario[bloco, str(estado)]
-            # print(dados_linha)
             if len(dados_linha) == 4:
                 if dados_linha[3] != 'retorne':
                     linha, novo_simbolo, movimento, novo_estado = dados_linha
-                    #print(linha, novo_simbolo, movimento, novo_estado)
                     if novo_estado != '*':
                         self.estado = novo_estado
                     if novo_simbolo != '*':
                         self.fita[self.cabeca] = novo_simbolo
-                    #print(bloco, self.fita[self.cabeca], movimento, self.estado)
-                    print(bloco, simbolo, self.cabeca)
-                    # print(self.fita)
+                    print(bloco, simbolo, self.estado)
                     if movimento == 'e':
                         self.cabeca -= 1
                         self.simbolo = self.fita[self.cabeca]
@@ -218,19 +184,17 @@ class MT:
                     self.passo_bloco(
                         bloco, self.estado, self.simbolo, estado_retorno, bloco_retorno)
                 else:
-                    # print(self.topo_pilha.dado)
                     self.remove_pilha()
-                    # print(self.topo_pilha)
+
                     # Retornar para o bloco anterior
                     linha, novo_simbolo, movimento, novo_estado = dados_linha
-                    #print(linha, novo_simbolo, movimento, novo_estado)
+
                     if novo_estado != '*':
                         self.estado = novo_estado
                     if novo_simbolo != '*':
                         self.fita[self.cabeca] = novo_simbolo
-                    #print(bloco, self.fita[self.cabeca], movimento, self.estado)
-                    print(bloco, simbolo)
-                    # print(self.fita)
+
+                    print(bloco, simbolo, self.estado)
                     if movimento == 'e':
                         self.cabeca -= 1
                         self.simbolo = self.fita[self.cabeca]
@@ -242,7 +206,6 @@ class MT:
 
                     if self.topo_pilha is not None:
                         if self.topo_pilha.anterior == None:
-                            # print("AAAAAAAAA")
                             self.bloco = self.topo_pilha.dado[4]
                             self.estado = self.topo_pilha.dado[3]
                             self.passo(self.bloco, self.estado,
@@ -257,8 +220,6 @@ class MT:
                         self.passo(bloco_retorno, estado_retorno, self.simbolo)
             else:
                 # Caso de bloco sendo chamado dentro de outro bloco
-                # print("-----------------------")
-                # print(self.topo_pilha.dado)
 
                 bloco_retorno = self.bloco
                 estado_retorno, bloco_atual, estado_inicial = dados_linha
@@ -267,15 +228,15 @@ class MT:
                 self.insere_pilha(
                     (bloco_atual, estado_inicial, self.fita[self.cabeca], estado_retorno, bloco_retorno))
                 dados = self.topo_pilha.dado
-                # print(estado)
 
-                self.passo_bloco(dados[0], dados[1],
+                # Essa linha eh responsavel por checar qual o estado inicial do bloco chamado e atualizar o self.estado com esse estado inicial
+                self.estado = self.inicio_bloco[dados[0]]
+
+                self.passo_bloco(dados[0], self.estado,
                                  dados[2], dados[3], dados[4])
-                #print(estado_retorno, bloco_atual, estado_inicial)
 
     def programa(self):
         erro = 0
-        # self.teste()
         while self.estado != 'pare' and erro < 100:
             self.passo(self.bloco, self.estado, self.simbolo)
             erro += 1
@@ -306,9 +267,7 @@ def remove_tabulacao(nome_arquivo):
         return conteudo_sem_tab
 
 
-input = '11'
-arquivo_sem_tab = remove_tabulacao('teste_bloco_retorne.txt')
-# mt = MT(input, arquivo_sem_tab)
+arquivo_sem_tab = remove_tabulacao('teste2.txt')
 arquivo_sem_tab1 = remove_tabulacao(programa_value)
 mt = MT(palavra_inicial, arquivo_sem_tab)
 mt.teste()
