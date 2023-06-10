@@ -6,6 +6,7 @@ bloco main 1
 fim ; main
 
 bloco teste 3
-    3 1 -- * e 3
-    3 _ -- _ d pare
+    3 1 -- * e 4
+    4 * -- * i 5
+    5 _ -- _ d retorne
 fim ; teste
