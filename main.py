@@ -133,7 +133,6 @@ class MT:
                     self.simbolo = self.fita[self.cabeca]
                 elif movimento == 'i':
                     self.simbolo = self.fita[self.cabeca]
-                self.passo(self.bloco, self.estado, self.simbolo, args, passo_limite)
             elif len(dados_linha) == 5:
                 return
             else:
@@ -253,7 +252,13 @@ class MT:
                                  dados[2], dados[3], dados[4], args, passo_limite)
 
     def programa(self, args, passo_limite):
-        self.passo(self.bloco, self.estado, self.simbolo, args, passo_limite)
+        erro = 0
+        while self.estado != 'pare' and erro < 100000000:
+            #print(self.conta_passos)
+            self.passo(self.bloco, self.estado, self.simbolo, args, passo_limite)
+            erro += 1
+        if args.verbose:
+            self.mostra_fita()
 
     def mostra_fita(self):
         elementos_esquerda = self.fita[max(0, self.cabeca-20):self.cabeca]
