@@ -301,7 +301,7 @@ def main():
     parser.add_argument('-step', '-s', type=int, help='Mostra n linhas de execução passo a passo na tela')
     args = parser.parse_args()
 
-    with open(args.programa, 'r') as file:
+    with open(('tp2etestes/' + args.programa), 'r') as file:
         codigo_mt = file.read()
 
     print('Simulador de Máquina de Turing v1.0 - IFMG 2023')
@@ -311,7 +311,8 @@ def main():
     palavra_inicial = input('Forneça a palavra inicial: ')
 
     step_value = args.step
-    programa_value = args.programa
+    programa_value = 'tp2etestes/'
+    programa_value += args.programa
 
     #arquivo_sem_tab = remove_tabulacao('tp2teoria.txt')
     #print(arquivo_sem_tab)

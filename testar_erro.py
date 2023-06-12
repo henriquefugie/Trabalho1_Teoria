@@ -7,8 +7,8 @@ def executar_arquivo(nome_arquivo, x):
 
     for _ in range(x):
         # Gerar dois números aleatórios entre 1 e 100
-        numero1 = random.randint(1, 1000000)
-        numero2 = random.randint(1, 1000000)
+        numero1 = random.randint(1, 100000000000000000000)
+        numero2 = random.randint(1, 100000000000000000000)
         expressao = f"{numero1}+{numero2}="
         resultado = numero1 + numero2
         try:
@@ -31,6 +31,7 @@ def executar_arquivo(nome_arquivo, x):
             else:
                 print("resultados diferentes.")
                 resultados_diferentes = True
+                return
         except FileNotFoundError:
             print(f"O arquivo {nome_arquivo} não foi encontrado.")
         except subprocess.SubprocessError as e:
