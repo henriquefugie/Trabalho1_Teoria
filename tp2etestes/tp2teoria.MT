@@ -14,15 +14,15 @@ bloco main 0
     0 = -- * d 0
     0 _ -- * e 1
 
-    ;Funcao que apenas retorna até o início e chama a funcao 2 que identifica o primeiro número
+    ; Funcao que apenas retorna até o início e chama a funcao 2 que identifica o primeiro número
     1 _ -- * d 2
     1 * -- * e 1
 
-    ;Procura o simbolo do + para que possa armazenar o primeiro numero
+    ; Procura o simbolo do + para que possa armazenar o primeiro numero
     2 + -- * e 3
     2 * -- * d 2
 
-    ;Este estado que armazena qual número foi reconhecido, o primeiro numero
+    ; Este estado que armazena qual número foi reconhecido, o primeiro numero
     3 A -- a d 4
     3 B -- b d 5
     3 C -- c d 6
@@ -36,51 +36,51 @@ bloco main 0
     3 _ -- * d 124
     3 * -- * e 3
 
-    ;Procura o segundo numero que sera somado com 0
+    ; Procura o segundo numero que sera somado com 0
     4 = -- * e 14
     4 * -- * d 4
 
-    ;Procura o segundo numero que sera somado com 1
+    ; Procura o segundo numero que sera somado com 1
     5 = -- * e 15
     5 * -- * d 5
 
-    ;Procura o segundo numero que sera somado com 2
+    ; Procura o segundo numero que sera somado com 2
     6 = -- * e 16
     6 * -- * d 6
 
-    ;Procura o segundo numero que sera somado com 3
+    ; Procura o segundo numero que sera somado com 3
     7 = -- * e 17
     7 * -- * d 7
 
-    ;Procura o segundo numero que sera somado com 4
+    ; Procura o segundo numero que sera somado com 4
     8 = -- * e 18
     8 * -- * d 8
 
-    ;Procura o segundo numero que sera somado com 5
+    ; Procura o segundo numero que sera somado com 5
     9 = -- * e 19
     9 * -- * d 9
 
-    ;Procura o segundo numero que sera somado com 6
+    ; Procura o segundo numero que sera somado com 6
     10 = -- * e 20
     10 * -- * d 10
 
-    ;Procura o segundo numero que sera somado com 7
+    ; Procura o segundo numero que sera somado com 7
     11 = -- * e 21
     11 * -- * d 11
 
-    ;Procura o segundo numero que sera somado com 8
+    ; Procura o segundo numero que sera somado com 8
     12 = -- * e 22
     12 * -- * d 12
 
-    ;Procura o segundo numero que sera somado com 9
+    ; Procura o segundo numero que sera somado com 9
     13 = -- * e 23
     13 * -- * d 13
 
-    ;Procura o segundo numero que sera somado com vazio
+    ; Procura o segundo numero que sera somado com vazio
     124 = -- * e 125
     124 * -- * d 124
 
-    ;Identifica qual o numero que sera somado com o vazio
+    ; Identifica qual o numero que sera somado com o vazio
     125 A -- a d 24
     125 B -- b d 25
     125 C -- c d 26
@@ -94,7 +94,7 @@ bloco main 0
     125 + -- * i 126
     125 * -- * e 125
 
-    ;Identifica qual o numero que sera somado com o 0
+    ; Identifica qual o numero que sera somado com o 0
     14 A -- a d 24
     14 B -- b d 25
     14 C -- c d 26
@@ -108,7 +108,7 @@ bloco main 0
     14 + -- * d 24
     14 * -- * e 14
 
-    ;Identifica qual o numero que sera somado com o 1
+    ; Identifica qual o numero que sera somado com o 1
     15 A -- a d 34
     15 B -- b d 35
     15 C -- c d 36
@@ -122,7 +122,7 @@ bloco main 0
     15 + -- * d 34
     15 * -- * e 15
 
-    ;Identifica qual o numero que sera somado com o 2
+    ; Identifica qual o numero que sera somado com o 2
     16 A -- a d 44
     16 B -- b d 45
     16 C -- c d 46
@@ -136,7 +136,7 @@ bloco main 0
     16 + -- * d 44
     16 * -- * e 16
 
-    ;Identifica qual o numero que sera somado com o 3
+    ; Identifica qual o numero que sera somado com o 3
     17 A -- a d 54
     17 B -- b d 55
     17 C -- c d 56
@@ -150,7 +150,7 @@ bloco main 0
     17 + -- * d 54
     17 * -- * e 17
 
-    ;Identifica qual o numero que sera somado com o 4
+    ; Identifica qual o numero que sera somado com o 4
     18 A -- a d 64
     18 B -- b d 65
     18 C -- c d 66
@@ -164,7 +164,7 @@ bloco main 0
     18 + -- * d 64
     18 * -- * e 18
 
-    ;Identifica qual o numero que sera somado com o 5
+    ; Identifica qual o numero que sera somado com o 5
     19 A -- a d 74
     19 B -- b d 75
     19 C -- c d 76
@@ -178,7 +178,7 @@ bloco main 0
     19 + -- * d 74
     19 * -- * e 19
 
-    ;Identifica qual o numero que sera somado com o 6
+    ; Identifica qual o numero que sera somado com o 6
     20 A -- a d 84
     20 B -- b d 85
     20 C -- c d 86
@@ -192,7 +192,7 @@ bloco main 0
     20 + -- * d 84
     20 * -- * e 20
 
-    ;Identifica qual o numero que sera somado com o 7
+    ; Identifica qual o numero que sera somado com o 7
     21 A -- a d 94
     21 B -- b d 95
     21 C -- c d 96
@@ -206,7 +206,7 @@ bloco main 0
     21 + -- * d 94
     21 * -- * e 21
 
-    ;Identifica qual o numero que sera somado com o 8
+    ; Identifica qual o numero que sera somado com o 8
     22 A -- a d 104
     22 B -- b d 105
     22 C -- c d 106
@@ -220,7 +220,7 @@ bloco main 0
     22 + -- * d 104
     22 * -- * e 22
 
-    ;Identifica qual o numero que sera somado com o 9
+    ; Identifica qual o numero que sera somado com o 9
     23 A -- a d 114
     23 B -- b d 115
     23 C -- c d 116
@@ -234,7 +234,7 @@ bloco main 0
     23 + -- * d 114
     23 * -- * e 23
 
-    ;Daqui pra frente estão os resultados das somas feitas com o vazio
+    ; Daqui pra frente estão os resultados das somas feitas com o vazio
     24 + -- 1 i 1
     24 _ -- 0 i 1
     24 * -- * d 24
@@ -275,7 +275,7 @@ bloco main 0
     33 _ -- 9 i 1
     33 * -- * d 33
 
-    ;Daqui pra frente estão os resultados das somas feitas com o 1
+    ; Daqui pra frente estão os resultados das somas feitas com o 1
     34 + -- 2 i 1
     34 _ -- 1 i 1
     34 * -- * d 34
@@ -316,7 +316,7 @@ bloco main 0
     43 _ -- 0 d 164
     43 * -- * d 43
 
-    ;Daqui pra frente estão os resultados das somas feitas com o 2
+    ; Daqui pra frente estão os resultados das somas feitas com o 2
     44 + -- 3 i 1
     44 _ -- 2 i 1
     44 * -- * d 44
@@ -357,7 +357,7 @@ bloco main 0
     53 _ -- 1 d 164
     53 * -- * d 53
 
-    ;Daqui pra frente estão os resultados das somas feitas com o 3
+    ; Daqui pra frente estão os resultados das somas feitas com o 3
     54 + -- 4 i 1
     54 _ -- 3 i 1
     54 * -- * d 54
@@ -398,7 +398,7 @@ bloco main 0
     63 _ -- 2 d 164
     63 * -- * d 63
 
-    ;Daqui pra frente estão os resultados das somas feitas com o 4
+    ; Daqui pra frente estão os resultados das somas feitas com o 4
     64 + -- 5 i 1
     64 _ -- 4 i 1
     64 * -- * d 64
@@ -439,7 +439,7 @@ bloco main 0
     73 _ -- 3 d 164
     73 * -- * d 73
 
-    ;Daqui pra frente estão os resultados das somas feitas com o 5
+    ; Daqui pra frente estão os resultados das somas feitas com o 5
     74 + -- 6 i 1
     74 _ -- 5 i 1
     74 * -- * d 74
@@ -480,7 +480,7 @@ bloco main 0
     83 _ -- 4 d 164
     83 * -- * d 83
 
-    ;Daqui pra frente estão os resultados das somas feitas com o 6
+    ; Daqui pra frente estão os resultados das somas feitas com o 6
     84 + -- 7 i 1
     84 _ -- 6 i 1
     84 * -- * d 84
@@ -521,7 +521,7 @@ bloco main 0
     93 _ -- 5 d 164
     93 * -- * d 93
 
-    ;Daqui pra frente estão os resultados das somas feitas com o 7
+    ; Daqui pra frente estão os resultados das somas feitas com o 7
     94 + -- 8 i 1
     94 _ -- 7 i 1
     94 * -- * d 94
@@ -562,7 +562,7 @@ bloco main 0
     103 _ -- 6 d 164
     103 * -- * d 103
 
-    ;Daqui pra frente estão os resultados das somas feitas com o 8
+    ; Daqui pra frente estão os resultados das somas feitas com o 8
     104 + -- 9 i 1
     104 _ -- 8 i 1
     104 * -- * d 104
@@ -603,7 +603,7 @@ bloco main 0
     113 _ -- 7 d 164
     113 * -- * d 113
 
-    ;Daqui pra frente estão os resultados das somas feitas com o 9
+    ; Daqui pra frente estão os resultados das somas feitas com o 9
     114 + -- 0 d 164
     114 _ -- 9 i 1
     114 * -- * d 114
@@ -644,11 +644,11 @@ bloco main 0
     123 _ -- 8 d 164
     123 * -- * d 123
 
-    ;Esta parte do código é responsável por verificar se o programa finalizou, onde ele achou vazio tanto no primeiro numero quanto no segundo
+    ; Esta parte do código é responsável por verificar se o programa finalizou, onde ele achou vazio tanto no primeiro numero quanto no segundo
     126 _ -- * d 127
     126 * -- * e 126
 
-    ;Aqui o código retorna os números para as letras, e caso tenha um + ele entra em um caso especial, e coloca um hashtag no final
+    ; Aqui o código retorna os números para as letras, e caso tenha um + ele entra em um caso especial, e coloca um hashtag no final
     127 a -- 0 d 127
     127 b -- 1 d 127
     127 c -- 2 d 127
@@ -663,7 +663,7 @@ bloco main 0
     127 _ -- # i 128
     127 * -- * d 127
 
-    ;Aqui ele faz o processo de inverter a palavra utilizando o hashtag como base para contruir corretamente e no final arrasta o número através do hashtag
+    ; Aqui ele faz o processo de inverter a palavra utilizando o hashtag como base para contruir corretamente e no final arrasta o número através do hashtag
     128 _ -- * e 128
     128 0 -- _ i 129
     128 1 -- _ i 130
@@ -789,11 +789,11 @@ bloco main 0
     162 _ -- 9 d 151
     162 * -- * e 162
 
-    ;Este caso específico trata caso tenha sobrado um + que significa vai um e nao foi somado, ele transforma em 1
+    ; Este caso específico trata caso tenha sobrado um + que significa vai um e nao foi somado, ele transforma em 1
     163 _ -- # i 128
     163 + -- 1 d 127
     163 * -- * d 163
 
-    ;Esta parte cuida do +, vai um, que sempre adiciona um valor, onde nas operacoes dos resultados, tem um tratamentoe especial para cada soma, caso ache o +
+    ; Esta parte cuida do +, vai um, que sempre adiciona um valor, onde nas operacoes dos resultados, tem um tratamentoe especial para cada soma, caso ache o +
     164 _ -- + i 1
-fim ; main
+fim ;  main
