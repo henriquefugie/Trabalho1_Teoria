@@ -1,5 +1,5 @@
 bloco main 0
-    ;Transforma os Numeros em letras maiusculas
+    ; Transforma os Numeros em letras maiusculas
     0 0 -- A d 0
     0 1 -- B d 0
     0 2 -- C d 0
