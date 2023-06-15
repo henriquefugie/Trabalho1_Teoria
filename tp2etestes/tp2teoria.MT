@@ -796,4 +796,4 @@ bloco main 0
 
     ; Esta parte cuida do +, vai um, que sempre adiciona um valor, onde nas operacoes dos resultados, tem um tratamentoe especial para cada soma, caso ache o +
     164 _ -- + i 1
-fim ;  main
+fim ; main
