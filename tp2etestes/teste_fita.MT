@@ -1,3 +1,3 @@
 bloco main 1
-    1 1 -- 2 d pare
+    1 _ -- 2 d pare
 fim ; main
