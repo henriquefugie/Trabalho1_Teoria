@@ -53,8 +53,10 @@ class MT:
                         # Entra aqui quando for mandado para outro bloco
                         # Exemplo: 10 moveFim 11
                         else:
-                            self.dicionario[self.bloco_linha[0], valores_linha[0]] = (
-                                valores_linha[2], valores_linha[1], 1)
+                            #print(valores_linha)
+                            if valores_linha[0] != 'fim':
+                                self.dicionario[self.bloco_linha[0], valores_linha[0]] = (
+                                    valores_linha[2], valores_linha[1], 1)
                     # Caso breakpoint
                     if len(valores_linha) == 4:
                         self.dicionario[self.bloco_linha[0], valores_linha[0]] = (
@@ -85,8 +87,10 @@ class MT:
                         
                         # Armazena tambem para cada caso, a situacao de se ter um simbolo qualquer que pode
                         # ser identificado pelo *, se tem isso pois o * identifica todos os simbolos existentes
-                        self.dicionario[self.bloco_linha[0], estado_atual, '*'] = (
-                            self.bloco_linha[1], novo_simbolo, movimento, novo_estado)
+                        #print(valores_linha)
+                        if valores_linha[1] == '*':
+                            self.dicionario[self.bloco_linha[0], estado_atual, '*'] = (
+                                self.bloco_linha[1], novo_simbolo, movimento, novo_estado)
                     # Caso breakpoint
                     if len(valores_linha) == 7:
                         estado_atual, simbolo_atual, traco, novo_simbolo, movimento, novo_estado, breakpoint = valores_linha
@@ -101,16 +105,6 @@ class MT:
             linha, novo_simbolo, movimento, novo_estado = dados_linha
         elif len(dados_linha) == 5:
             linha, novo_simbolo, movimento, novo_estado, breakpoint = dados_linha
-        """print(self.dicionario)
-        if novo_estado != '*' and novo_simbolo != '*':
-            chave = (self.bloco, str(self.estado), self.simbolo)
-            if chave in self.dicionario:
-                dado = self.dicionario[chave]
-                # dado[1] = novo simbolo
-                # dado[3] = novo estado
-                if dado[1] != novo_simbolo or dado[3] != novo_estado:
-                    print("Erro")
-                    sys.exit("Programa encerrado devido a um erro")"""
         if novo_estado != '*':
             self.estado = novo_estado
         if novo_simbolo != '*':
@@ -133,15 +127,18 @@ class MT:
 
     # Retorna o valor do dicionario baseado no bloco, estado e simbolo atual
     def chave_dicionario(self, bloco, estado, simbolo):
-        chave = bloco, str(estado), simbolo
-        if chave in self.dicionario:
-            dados_linha = self.dicionario[chave]
+        chave1 = bloco, str(estado), simbolo
+        chave2 = bloco, str(estado), '*'
+        if chave1 in self.dicionario:
+            dados_linha = self.dicionario[chave1]
+        elif chave2 in self.dicionario:
+            dados_linha = self.dicionario[chave2]
         else:
-            chave = bloco, str(estado), '*'
+            chave = bloco, str(estado)
             if chave in self.dicionario:
-                dados_linha = self.dicionario[bloco, str(estado), '*']
-            else:
                 dados_linha = self.dicionario[bloco, str(estado)]
+            else:
+                sys.exit("Chave nao existente")
         return dados_linha
 
     def passo(self, bloco, estado, simbolo, args, passo_limite):
@@ -228,6 +225,7 @@ class MT:
     def programa(self, args, passo_limite):
         erro = 0
         verifica_break = -1
+        #print(self.dicionario)
         while self.estado != 'pare' and erro < 100000000 and verifica_break != 1 and erro < passo_limite:
             verifica_break = self.passo(self.bloco, self.estado, self.simbolo, args, passo_limite)
             if not args.resume:

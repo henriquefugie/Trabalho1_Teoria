@@ -3,12 +3,12 @@ bloco main 0
     1 _ -- _ e 2
     1 1 -- 1 d 1
     2 teste 3
-    3 _ -- _ d pare
+    3 * -- * d pare
 fim ; main
 
-bloco teste 1
-    1 * -- * i 3 !
-    3 1 -- * e 4
+bloco teste 10
+    10 * -- * d 3 !
+    3 * -- * e 4
     4 * -- * i 5
-    5 _ -- _ d retorne
+    5 * -- * d retorne
 fim ; teste
