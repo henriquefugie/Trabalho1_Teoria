@@ -3,6 +3,8 @@ import argparse
 
 # Joao Vitor Dias Fernandes e Henrique Fugie
 
+# Comando de exemplo cmd para executar: python simturing.py tp2teoria.MT -v
+
 # Pilha para ser usada na verificacao de blocos
 class NoPilha:
     def __init__(self, dado=0, nodo_anterior=None):
@@ -53,7 +55,6 @@ class MT:
                         # Entra aqui quando for mandado para outro bloco
                         # Exemplo: 10 moveFim 11
                         else:
-                            #print(valores_linha)
                             if valores_linha[0] != 'fim':
                                 self.dicionario[self.bloco_linha[0], valores_linha[0]] = (
                                     valores_linha[2], valores_linha[1], 1)
@@ -87,7 +88,6 @@ class MT:
                         
                         # Armazena tambem para cada caso, a situacao de se ter um simbolo qualquer que pode
                         # ser identificado pelo *, se tem isso pois o * identifica todos os simbolos existentes
-                        #print(valores_linha)
                         if valores_linha[1] == '*':
                             self.dicionario[self.bloco_linha[0], estado_atual, '*'] = (
                                 self.bloco_linha[1], novo_simbolo, movimento, novo_estado)
@@ -225,12 +225,10 @@ class MT:
     def programa(self, args, passo_limite):
         erro = 0
         verifica_break = -1
-        #print(self.dicionario)
         while self.estado != 'pare' and erro < 100000000 and verifica_break != 1 and erro < passo_limite:
             verifica_break = self.passo(self.bloco, self.estado, self.simbolo, args, passo_limite)
             if not args.resume:
                 self.mostra_fita()
-            #print(self.estado)
             erro += 1
         return verifica_break
 

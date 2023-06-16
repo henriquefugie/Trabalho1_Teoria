@@ -44,4 +44,4 @@ def executar_arquivo(nome_arquivo, x):
 
 # Solicitar o valor de x ao usuário
 x = int(input("Digite o valor de x: "))
-executar_arquivo("main.py", x)  # Execute x times with random values
+executar_arquivo("simturing.py", x)  # Execute x times with random values
