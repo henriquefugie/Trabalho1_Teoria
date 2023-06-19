@@ -147,15 +147,20 @@ class MT:
                 self.conta_passos += 1
         if str(estado) != 'pare':
             dados_linha = self.chave_dicionario(bloco, estado, simbolo)
-            # Breakpoint
+            # Breakpoint: Ex.:0 0 -- A d 0 !
             if len(dados_linha) != 5:
+                # Linha de comando: Ex.: 0 0 -- A d 0
                 if len(dados_linha) == 4:
                     self.executa_linha(dados_linha)
+                # Chamada de bloco: Ex.: 2 moveIni 3
                 else:
                     bloco_retorno = self.bloco
                     estado_retorno, bloco_atual, estado_inicial = dados_linha
                     self.bloco = bloco_atual
                     bloco, estado, simbolo, estado_retorno, bloco_retorno
+
+                    # Sempre que entrar em um bloco, eh empilhado na pilha como um nodo contendo informacoes 
+                    # do bloco atual e anterior para ser desempilhado depois
                     self.insere_pilha((bloco_atual, estado_inicial,
                                     self.fita[self.cabeca], estado_retorno, bloco_retorno))
                     
@@ -163,6 +168,8 @@ class MT:
 
                     # Essa linha eh responsavel por checar qual o estado inicial do bloco chamado e atualizar o self.estado com esse estado inicial
                     self.estado = self.inicio_bloco[dados[0]]
+
+                    # Apos armazenado os dados na pilha e atualizado o self, eh chamado a funcao do bloco
                     self.passo_bloco(dados[0], self.estado, dados[2], dados[3], dados[4], args, passo_limite)
             else:
                 self.executa_linha(dados_linha)
@@ -178,43 +185,63 @@ class MT:
             self.mostra_fita()
         if str(estado) != 'pare':
             dados_linha = self.chave_dicionario(bloco, estado, simbolo)
+            # Breakpoint: Ex.:0 0 -- A d 0 !
             if len(dados_linha) != 5:
-                # Breakpoint
+                # Linha de comando: Ex.: 0 0 -- A d 0
                 if len(dados_linha) == 4:
+                    # Se nao tiver que retornar do bloco, continua
+                    # na funcao do bloco
                     if dados_linha[3] != 'retorne':
                         self.executa_linha(dados_linha)
                         self.passo_bloco(
                             bloco, self.estado, self.simbolo, estado_retorno, bloco_retorno, args, passo_limite)
+                    # Caso de retorne, ai volta para o bloco anterior
                     else:
                         self.remove_pilha()
                         # Retornar para o bloco anterior
                         self.executa_linha(dados_linha)
                         if self.topo_pilha is not None:
+                            # Caso em que nao tem nada na pilha
+                            # entao volta para o main
                             if self.topo_pilha.anterior == None:
+                                # Bloco anterior
                                 self.bloco = self.topo_pilha.dado[4]
+                                # Estado que deve ser executado no
+                                # bloco anterior
                                 self.estado = self.topo_pilha.dado[3]
                                 self.passo(self.bloco, self.estado,
                                         self.fita[self.cabeca], args, passo_limite)
+                            # Caso em que em que ainda tem algo na pilha
                             else:
                                 dados = self.topo_pilha.dado
                                 self.passo_bloco(
                                     dados[0], dados[1], dados[2], dados[3], dados[4], args, passo_limite)
+                        # Caso que nao tem nada na pilha
                         else:
+                            # Bloco anterior
                             self.bloco = bloco_retorno
+                            # Estado que deve ser executado no
+                                # bloco anterior
                             self.estado = estado_retorno
                             self.passo(bloco_retorno, estado_retorno, self.simbolo, args, passo_limite)
+                # Chamada de bloco: Ex.: 2 moveIni 3
                 else:
                     # Caso de bloco sendo chamado dentro de outro bloco
                     bloco_retorno = self.bloco
                     estado_retorno, bloco_atual, estado_inicial = dados_linha
                     self.bloco = bloco_atual
                     bloco, estado, simbolo, estado_retorno, bloco_retorno
+
+                    # Sempre que entrar em um bloco, eh empilhado na pilha como um nodo contendo informacoes 
+                    # do bloco atual e anterior para ser desempilhado depois
                     self.insere_pilha(
                         (bloco_atual, estado_inicial, self.fita[self.cabeca], estado_retorno, bloco_retorno))
                     dados = self.topo_pilha.dado
 
                     # Essa linha eh responsavel por checar qual o estado inicial do bloco chamado e atualizar o self.estado com esse estado inicial
                     self.estado = self.inicio_bloco[dados[0]]
+
+                    # Apos armazenado os dados na pilha e atualizado o self, eh chamado a funcao do bloco
                     self.passo_bloco(dados[0], self.estado,
                                     dados[2], dados[3], dados[4], args, passo_limite)
             else:
@@ -232,7 +259,11 @@ class MT:
             erro += 1
         return verifica_break
 
+    # Mostra uma parte da fita
     def mostra_fita(self):
+        # Como padrao delimitador igual a ()
+        # O usuario pode alterar o delimitador com o comando
+        # -head "<>" por exemplo
         delim = self.delimitador[0]
         token_esquerda = delim[0]
         token_direita = delim[1]
